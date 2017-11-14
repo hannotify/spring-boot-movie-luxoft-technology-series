@@ -1,0 +1,54 @@
+<html ng-app="movie">
+<head>
+    <title>Info support Movie DataBase</title>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="MainController as main" ng-init="main.list()">
+    <div id="movie-list" ng-show="main.showList">
+        <h1>Movies Watched</h1>
+        <table>
+			<tr>
+				<th>Name</th>
+				<th>Release Year</th>
+				<th>Lead Actor</th>
+				<th>Supporting Actor</th>
+			</tr>	
+            <tr ng-repeat="movie in main.movies">
+				<td>{{movie.name}}</td>
+				<td>{{movie.year}}</td>
+				<td>{{movie.leadActor}}</td>
+				<td>{{movie.supportingActor}}</td>
+                <td><a href="#" ng-click="main.goToEdit(movie)">Edit</a></td>
+                <td><a href="#" ng-click="main.delete(movie)">Delete</a></td>
+            </tr>
+        </table>
+        <a href="#" ng-click="main.goToAdd()">Watch a movie</a>
+    </div>
+    <div id="movie-detail" ng-hide="main.showList">
+        <a href="/">&lt; Back to Movie List</a>
+        <br/>
+
+        <form ng-submit="main.save(main.activeMovie)">
+        <label for="name">Name: </label>
+            <input type="text" id="name" name="name" ng-model="main.activeMovie.name"/>
+            <br/>
+
+            <label for="year">Release Year: </label>
+            <input type="text" id="year" name="year" ng-model="main.activeMovie.year"/>
+            <br/>
+
+            <label for="leadActor">Lead Actor: </label>
+            <input type="text" id="leadActor" name="leadActor" ng-model="main.activeMovie.leadActor"/>
+            <br/>
+			
+            <label for="supportingActor">Supporting Actor: </label>
+            <input type="text" id="supportingActor" name="supportingActor" ng-model="main.activeMovie.supportingActor"/>
+            <br/>
+
+            <input type="submit"/>
+        </form>
+    </div>
+</body>
+</html>
